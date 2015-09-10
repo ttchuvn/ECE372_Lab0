@@ -8,5 +8,10 @@
 #include <xc.h>
 
 void initSwitch1(){
+   
+    PORTDbits.RD6 = 0;
+    PORTDbits.RD7 = 0;
+    PORTDbits.RD13 = 0;
+        
     //TODO: Initialize switch 1
 }

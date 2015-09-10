@@ -6,8 +6,12 @@
  */
 
 #include <xc.h>
+#include <proc/p32mx470f512l.h>
 
 void initTimer1(){
+    TMR1 = 0;
+    PR1 = 2442;
+    T1CONbits.TCKPS = 3;
     //TODO: Initialize Timer 1 to have a period of
     // 1 second. Enable its interrupt
 }

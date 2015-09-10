@@ -37,6 +37,10 @@ int main() {
     while(1){
 
         //TODO: Implement a state machine to create the desired functionality
+        if(PORTDbits.RD6 == 0)
+        {
+            turnOnLED(0);
+        }
         
     }
     
