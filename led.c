@@ -7,13 +7,17 @@
 
 #include <xc.h>
 #include "led.h"
-
+#define OUTPUT 0
+#define INPUT 1
 void initLEDs(){
-    
-    //TODO: Initialize LEDs
-    TRISDbits.TRISD0 = 0; //Initialize top LED as output.
-    TRISDbits.TRISD1 = 0; //Initialize mid LED as output.
-    TRISDbits.TRISD2 = 0; //Initialize bot LED as output.
+    //TODO: Initialize LEDs 
+    TRISDbits.TRISD0 = OUTPUT; //Set top LED to zero
+    TRISDbits.TRISD1 = OUTPUT; //Set middle LED to zero
+    TRISDbits.TRISD2 = OUTPUT; //Set bottom LED to zero
+    //Set LAD all to zero
+    LATDbits.LATD0 = OUTPUT;   
+    LATDbits.LATD1 = OUTPUT;   
+    LATDbits.LATD2 = OUTPUT;  
 }
 
 void turnOnLED(int led){
@@ -23,26 +27,18 @@ void turnOnLED(int led){
     switch (led) {
         case 0:
             LATDbits.LATD0 = 1; //Turn on top LED.
+            LATDbits.LATD1 = 0;
+            LATDbits.LATD2 = 0;
             break;
         case 1:
+            LATDbits.LATD0 = 0;
             LATDbits.LATD1 = 1; //Turn on mid LED.
+            LATDbits.LATD2 = 0;
             break;
         case 2:
-            LATDbits.LATD2 = 1; //Turn on bot LED.
-            break;
+            LATDbits.LATD0 = 0;
+            LATDbits.LATD1 = 0; 
+            LATDbits.LATD2 = 1; //Turn on bottom LED.
+            break;//modified
     }    
-}
-
-void turnOffLED(int led){
-    switch (led) {
-        case 0:
-            LATDbits.LATD0 = 0; //Turn off top LED.
-            break;
-        case 1:
-            LATDbits.LATD1 = 0; //Turn off mid LED.
-            break;
-        case 2:
-            LATDbits.LATD2 = 0; //Turn off bot LED.
-            break;
-    } 
 }

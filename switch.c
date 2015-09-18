@@ -8,10 +8,12 @@
 #include <xc.h>
 
 void initSwitch1(){
-   
-    PORTDbits.RD6 = 0;
-    PORTDbits.RD7 = 0;
-    PORTDbits.RD13 = 0;
-        
     //TODO: Initialize switch 1
+    TRISDbits.TRISD6 = 1; //Initialize switch as input.
+   // CNPUEbits.CNPUE6 = 1; //Enable pull-up resistor.
+    
+    CNPUEbits.CNPUE6 = 1;
+                          //Since this means it's 1 by default, we
+                          //want to use 0 as the indicator for on
+    
 }
