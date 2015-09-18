@@ -6,14 +6,17 @@
  */
 
 #include <xc.h>
-
+#define INPUT 1
+#define OUTPUT 0
 void initSwitch1(){
     //TODO: Initialize switch 1
-    TRISDbits.TRISD6 = 1; //Initialize switch as input.
-   // CNPUEbits.CNPUE6 = 1; //Enable pull-up resistor.
-    
-    CNPUEbits.CNPUE6 = 1;
-                          //Since this means it's 1 by default, we
-                          //want to use 0 as the indicator for on
-    
+   TRISDbits.TRISD6 = INPUT; //Initialize switch
+   //enable interrupt
+   CNCONDbits.ON = INPUT;
+   CNENDbits.CNIED6 = INPUT; //Pull-up resistor.  
+   IEC1bits.CNDIE = INPUT;
+   
+   IFS1bits.CNDIF = OUTPUT;
+   CNPUDbits.CNPUD6 = INPUT;
+  
 }

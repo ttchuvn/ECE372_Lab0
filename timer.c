@@ -9,11 +9,10 @@
 
 void initTimer1(){
     //TODO: Initialize Timer 1 to have a period of
-    // 1 second. Enable its interrupt
-    TMR1 = 0;           // Initialize TMR1
-    PR1  = 5000;       // Some PR value to allow 1sec timer
-    T1CONbits.TCKPS = 3;// Pre-scalar = 256
-    T1CONbits.TCS = 0;  // Setting the oscillator; use internal peripheral clock
+    T1CONbits.TCKPS = 3;// initial pre-scalar
+    T1CONbits.TCS = 0;  // Setting the oscillator
+    TMR1 = 0;           // clear TMR1
+    PR1  = 3500;       // initialize PR1   
     IEC0bits.T1IE = 1;  // Enable the interrupt
     IFS0bits.T1IF = 0;  // Put the flag down
     IPC1bits.T1IP = 3;  // Configure the Interrupt Priority
@@ -21,7 +20,7 @@ void initTimer1(){
 }
 
 void timer1OnOff(int onOff) {
-    switch (onOff) {
+    switch (onOff){
         case 0:
             T1CONbits.ON = 0;
             break;
