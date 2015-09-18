@@ -20,7 +20,7 @@
 typedef enum stateTypeEnum{
     init, waitPush, waitRelease, prevLED, nextLED 
 } stateType;
-volatile stateType state = init; 
+stateType state = init; 
 
 int main() {    
     //This function is necessary to use interrupts. 
@@ -32,7 +32,6 @@ int main() {
     //initTimer2();
     initTimer1();
     int led;  
-    int i=0;
     while(1){
         switch(state)
         {
@@ -45,58 +44,52 @@ int main() {
             case waitPush:
                 if(PORTDbits.RD6 == 0)
                 {
-                    state = waitRelease;
-                    clearTimer(1);//re-enable timer
+                    TMR1CLR = 0xFFFF;; // Clear the timer interrupt flag
+                    state = waitRelease;                    
+                    T1CONbits.TON = 1;//enable timer
+                    IFS0bits.T1IF = 0;
                 }
-                break;   
-            
+                else state = waitPush;
+                    
+                break;
             case waitRelease:
                 if(PORTDbits.RD6 == 1)
                 { 
                     if(IFS0bits.T1IF == 1)
                     {
-                        //for (i=0; i<100000000;i++);
                         state = prevLED;
+                        T1CONbits.TON = 0;//clear the timer when not in use
                     }
                     else{
                         state = nextLED;
-                        clearTimer(0);
-                    } //clear the timer when not in use
+                        T1CONbits.TON = 0;//clear the timer when not in use
+                    } 
+                }
+                else{
+                    state = waitRelease;
                 }
                 break;
             
             case prevLED:
-                if(led==0)
-                {
-                    led=2;
-                    break;
-                }
-                else if(led==1)
-                {
-                    led=0;
-                    break;
-                }
-                else if(led==2)
-                {
-                    led=1;
-                    break;
-                }
-                turnOnLED(led);
-                IFS0bits.T1IF = 0;    
-                //led=0;
+                if(led == 0)led=2;
+                else if(led == 1)led=0;
+                else if(led == 2)led=1;
+                
+                turnOnLED(led);                
+                IFS0bits.T1IF = 0; 
                 state = waitPush;
+                T1CONbits.TON = 0;
                 break;
             
             case nextLED:
-                if(led==0)
-                    led=1;
-                else if(led==1)
-                    led=2;
-                else
-                    led=0;
+                if(led==0) led=1;
+                else if(led == 1)led=2;
+                else if (led == 2) led=0;
+                
                 turnOnLED(led);
                 IFS0bits.T1IF = 0;
                 state = waitPush;
+                T1CONbits.TON = 0;
                 break;
             
             default: break;            

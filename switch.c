@@ -12,10 +12,10 @@ void initSwitch1(){
     //TODO: Initialize switch 1
    TRISDbits.TRISD6 = INPUT; //Initialize switch
    //enable interrupt
-   CNCONDbits.ON = INPUT;
-   CNENDbits.CNIED6 = INPUT; //Pull-up resistor.  
-   IEC1bits.CNDIE = INPUT;
+   //CNCONDbits.ON = INPUT;
+   //CNENDbits.CNIED6 = INPUT; //Pull-up resistor.  
+   //IEC1bits.CNDIE = INPUT;
    
-   IFS1bits.CNDIF = OUTPUT;
+   //IFS1bits.CNDIF = OUTPUT;
    CNPUDbits.CNPUD6 = INPUT;  
 }

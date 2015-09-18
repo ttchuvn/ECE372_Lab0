@@ -40,5 +40,10 @@ void turnOnLED(int led){
             LATDbits.LATD1 = 0; 
             LATDbits.LATD2 = 1; //Turn on bottom LED.
             break;
+        default:
+            LATDbits.LATD0 = 0;
+            LATDbits.LATD1 = 0; 
+            LATDbits.LATD2 = 0; //Turn off all LEDs.
+            break;
     }    
 }
