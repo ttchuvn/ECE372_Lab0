@@ -12,6 +12,6 @@
 void initTimer1();
 void initTimer2();
 void delayMs(int delay);
-
+void clearTimer(int clear);
 #endif	/* TIMER_H */
 

@@ -17,6 +17,5 @@ void initSwitch1(){
    IEC1bits.CNDIE = INPUT;
    
    IFS1bits.CNDIF = OUTPUT;
-   CNPUDbits.CNPUD6 = INPUT;
-  
+   CNPUDbits.CNPUD6 = INPUT;  
 }

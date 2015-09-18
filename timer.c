@@ -12,26 +12,23 @@ void initTimer1(){
     T1CONbits.TCKPS = 3;// initial pre-scalar
     T1CONbits.TCS = 0;  // Setting the oscillator
     TMR1 = 0;           // clear TMR1
-    PR1  = 3500;       // initialize PR1   
+    PR1  = 2442;       // initialize PR1   
     IEC0bits.T1IE = 1;  // Enable the interrupt
     IFS0bits.T1IF = 0;  // Put the flag down
     IPC1bits.T1IP = 3;  // Configure the Interrupt Priority
     T1CONbits.ON = 1;   // Turn the timer on
 }
 
-void timer1OnOff(int onOff) {
-    switch (onOff){
-        case 0:
-            T1CONbits.ON = 0;
-            break;
-        case 1:
-            TMR1 = 0;         //Reinitialize TMR1
-            T1CONbits.ON = 1; //Re-enable TMR1
-            break;
-        default:
-            T1CONbits.ON = 0;
-            break;
+void clearTimer(int clear) {
+    if(clear == 0)
+        T1CONbits.ON = 0;
+    else if(clear == 1)
+    {
+        TMR1 = 0;         
+        T1CONbits.ON = 1; 
     }
+    else
+        T1CONbits.ON = 0;
 }
 
 //initTimer2(){
