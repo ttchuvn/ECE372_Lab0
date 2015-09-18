@@ -1,7 +1,7 @@
 /* 
  * File:   timer.h
  * Author: gvanhoy
- *
+ * Student: Toan Chu
  * Created on August 27, 2015, 3:26 PM
  */
 

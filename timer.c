@@ -1,7 +1,7 @@
 /* 
  * File:   timer.c
  * Author: gvanhoy
- *
+ * Student: Toan Chu
  * Created on August 27, 2015, 3:26 PM
  */
 
@@ -13,7 +13,7 @@ void initTimer1(){
     T1CONbits.TCS = 0;  // Setting the oscillator
     TMR1 = 0;           // clear TMR1
     PR1  = 2442;       // initialize PR1   
-   // IEC0bits.T1IE = 1;  // Enable the interrupt
+   //IEC0bits.T1IE = 1;  // Enable the interrupt
     IFS0bits.T1IF = 0;  // Put the flag down
    // IPC1bits.T1IP = 3;  // Configure the Interrupt Priority
     T1CONbits.ON = 1;   // Turn the timer on
